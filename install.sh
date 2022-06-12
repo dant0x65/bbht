@@ -170,6 +170,10 @@ echo "installiing gospider"
 GO111MODULE=on go install github.com/jaeles-project/gospider@latest
 echo "done"
 
+echo "installing assetfinder"
+GO111MODULE=on go install github.com/tomnomnom/assetfinder@latest
+echo "done"
+
 echo -e "\n\n\n\n\n\n\n\n\n\n\nDone! All tools are set up in ~/tools"
 ls -la
 echo "One last time: don't forget to set up AWS credentials in ~/.aws/!"
