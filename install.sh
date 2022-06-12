@@ -29,36 +29,6 @@ echo "done"
 
 
 #install go
-if [[ -z "$GOPATH" ]];then
-echo "It looks like go is not installed, would you like to install it now"
-PS3="Please select an option : "
-choices=("yes" "no")
-select choice in "${choices[@]}"; do
-        case $choice in
-                yes)
-
-					echo "Installing Golang"
-					wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
-					sudo tar -xvf go1.13.4.linux-amd64.tar.gz
-					sudo mv go /usr/local
-					export GOROOT=/usr/local/go
-					export GOPATH=$HOME/go
-					export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-					echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
-					echo 'export GOPATH=$HOME/go'	>> ~/.bash_profile			
-					echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile	
-					source ~/.bash_profile
-					sleep 1
-					break
-					;;
-				no)
-					echo "Please install go and rerun this script"
-					echo "Aborting installation..."
-					exit 1
-					;;
-	esac	
-done
-fi
 
 
 #Don't forget to set up AWS credentials!
@@ -110,11 +80,9 @@ sudo gem install bundler && bundle install --without test
 cd ~/tools/
 echo "done"
 
-echo "installing dirsearch"
-git clone https://github.com/maurosoria/dirsearch.git
-cd ~/tools/
+echo "installing ffuf"
+go install github.com/ffuf/ffuf@latest
 echo "done"
-
 
 echo "installing lazys3"
 git clone https://github.com/nahamsec/lazys3.git
@@ -161,11 +129,11 @@ cd ~/tools/
 echo "done"
 
 echo "installing httprobe"
-go get -u github.com/tomnomnom/httprobe 
+go get -u github.com/tomnomnom/httprobe
 echo "done"
 
 echo "installing unfurl"
-go get -u github.com/tomnomnom/unfurl 
+go get -u github.com/tomnomnom/unfurl
 echo "done"
 
 echo "installing waybackurls"
@@ -186,6 +154,21 @@ cd ~/tools/
 echo "done"
 
 
+echo "installing gau"
+go install github.com/lc/gau/v2/cmd/gau@latest
+echo "done"
+
+echo "installing subfinder"
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+echo "done"
+
+echo "installing anew"
+go install -v github.com/tomnomnom/anew@latest
+echo "done"
+
+echo "installiing gospider"
+GO111MODULE=on go install github.com/jaeles-project/gospider@latest
+echo "done"
 
 echo -e "\n\n\n\n\n\n\n\n\n\n\nDone! All tools are set up in ~/tools"
 ls -la
